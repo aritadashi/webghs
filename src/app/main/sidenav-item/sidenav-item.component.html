@@ -1,0 +1,30 @@
+<span>
+  <span *ngFor="let child of children">
+    <ng-container *ngIf="child.children && child.children.length > 0">
+      <mat-expansion-panel [class.mat-elevation-z0]="true">
+        <mat-expansion-panel-header>
+          <mat-icon mat-list-icon>{{ child.iconName }}</mat-icon
+          >{{ child.displayName }}
+        </mat-expansion-panel-header>
+        <app-sidenav-item
+          [item]="child"
+          [children]="child.children"
+          (sidenavItemClose)="onSidenavItemClose()"
+        ></app-sidenav-item>
+      </mat-expansion-panel>
+    </ng-container>
+
+    <ng-container *ngIf="!child.children || child.children.length === 0">
+      <mat-nav-list>
+        <mat-list-item
+          [routerLink]="child.route"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="onSidenavItemClose()"
+        >
+          <mat-icon>{{ child.iconName }}</mat-icon> {{ child.displayName }}
+        </mat-list-item>
+      </mat-nav-list>
+    </ng-container>
+  </span>
+</span>

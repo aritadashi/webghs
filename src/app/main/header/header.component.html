@@ -1,0 +1,63 @@
+<div class="basic-container">
+  <mat-toolbar class="menu-bar mat-elevation-z1">
+    <div fxHide.gt-xs>
+      <button mat-icon-button (click)="onToggleSidenav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div>
+      <button mat-icon-button (click)="onToggleSidenav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div>
+      <span>GHS</span>
+    </div>
+    <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+      <span *ngFor="let item of menuItems">
+        <!-- Handle branch node buttons here -->
+        <span *ngIf="item.children && item.children.length > 0">
+          <button
+            mat-button
+            [matMenuTriggerFor]="menu.childMenu"
+            [disabled]="item.disabled"
+          >
+            <mat-icon>{{ item.iconName }}</mat-icon>
+            {{ item.displayName }}
+          </button>
+          <app-menu-item #menu [items]="item.children"></app-menu-item>
+        </span>
+        <!-- Leaf node buttons here -->
+        <span *ngIf="!item.children || item.children.length === 0">
+          <button mat-button color="primary" [routerLink]="item.route">
+            {{ item.displayName }}
+          </button>
+        </span>
+      </span>
+    </div>
+    <div fxFlex fxLayout fxLayoutAlign="end">
+      <div fxLayoutAlign="end">
+        <span *ngIf="isDarkMode">
+          <mat-icon (click)="toggleDarkMode()">brightness_5</mat-icon>
+        </span>
+        <span *ngIf="!isDarkMode">
+          <mat-icon (click)="toggleDarkMode()">bedtime</mat-icon>
+        </span>
+        <!-- <mat-slide-toggle (click)="toggleDarkMode()"></mat-slide-toggle> -->
+      </div>
+
+      <div *ngIf="user$ | async as user; else login">
+        <span class="material-icons"> account_circle </span>
+        <span style="margin-left: 5px">{{ user.usuario }}</span>
+        <a style="margin-left: 5px" (click)="logout()">(Logout)</a>
+      </div>
+
+      <ng-template #login>
+        <span class="navbar-text">
+          <a [routerLink]="['']">Please, login!</a>
+        </span>
+      </ng-template>
+    </div>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,17 @@
+<div
+  class="container"
+  fxLayout
+  fxFlexFill
+  fxLayoutGap="20px"
+  fxLayoutGap.lt-md="5px"
+  fxLayoutAlign="center center"
+>
+  <div class="container-image" fxHide.lt-sm fxFlex="40%">
+    <mat-card class="image-card">
+      <img mat-card-image src="assets/img/lisa.jpg" alt="Logotipo da Empresa" />
+    </mat-card>
+  </div>
+  <div class="container-login" fxFlex="40%">
+    <router-outlet></router-outlet>
+  </div>
+</div>
