@@ -72,6 +72,11 @@ export class MenuSchemaService {
                     displayName: 'Grupos',
                     route: 'acesso-grupo',
                   },
+                  {
+                    menuID: '01/02/02/03-TESTES',
+                    displayName: 'Testes',
+                    route: 'acesso-teste',
+                  },
                 ],
               },
             ],
